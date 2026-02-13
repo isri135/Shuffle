@@ -12,79 +12,102 @@ type RoomRow = {
 };
 
 const styles: Record<string, React.CSSProperties> = {
+  // ---- RETRO THEME TOKENS ----
   page: {
     minHeight: "100vh",
-    background: "#0b0f19",
-    color: "#e5e7eb",
+    background: "#F6EFE5", // warm paper
+    color: "#151515",
     fontFamily:
-      'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
+      '"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial',
   },
+  // subtle paper grain / dots via overlay (we also add a global style below)
   container: {
     maxWidth: 980,
     margin: "0 auto",
-    padding: "28px 18px 60px",
+    padding: "28px 18px 70px",
   },
+
   topbar: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    gap: 12,
+    gap: 14,
     marginBottom: 18,
   },
-  title: { margin: 0, fontSize: 28, letterSpacing: -0.2 },
-  subtitle: { margin: "8px 0 0", color: "#9ca3af", fontSize: 13, lineHeight: 1.4 },
+
+  title: {
+    margin: 0,
+    fontSize: 34,
+    letterSpacing: -0.6,
+    lineHeight: 1.05,
+  },
+  subtitle: {
+    margin: "10px 0 0",
+    color: "rgba(0,0,0,0.65)",
+    fontSize: 13,
+    lineHeight: 1.5,
+  },
+
   pillRow: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 },
   pill: {
     fontSize: 12,
-    color: "#cbd5e1",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    color: "#151515",
+    background: "#FFF6B3",
+    border: "2px solid #151515",
     padding: "6px 10px",
     borderRadius: 999,
+    boxShadow: "3px 3px 0 #151515",
   },
+
+  // Buttons: thick outline + offset shadow
   btn: {
-    background: "#ffffff",
-    color: "#0b0f19",
-    border: "none",
-    borderRadius: 12,
+    background: "#151515",
+    color: "#FFFFFF",
+    border: "2px solid #151515",
+    borderRadius: 16,
     padding: "10px 14px",
     cursor: "pointer",
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: 14,
-    boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+    boxShadow: "4px 4px 0 #151515",
     whiteSpace: "nowrap",
+    transform: "translate(0,0)",
   },
   btnGhost: {
-    background: "transparent",
-    color: "#e5e7eb",
-    border: "1px solid rgba(255,255,255,0.18)",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 16,
     padding: "10px 14px",
     cursor: "pointer",
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: 14,
+    boxShadow: "4px 4px 0 #151515",
     whiteSpace: "nowrap",
   },
   btnSmall: {
-    background: "rgba(255,255,255,0.08)",
-    color: "#e5e7eb",
-    border: "1px solid rgba(255,255,255,0.12)",
-    borderRadius: 10,
-    padding: "8px 10px",
-    cursor: "pointer",
-    fontWeight: 800,
-    fontSize: 13,
-  },
-  btnSmallPrimary: {
-    background: "#ffffff",
-    color: "#0b0f19",
-    border: "none",
-    borderRadius: 10,
+    background: "#FFFFFF",
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 14,
     padding: "8px 10px",
     cursor: "pointer",
     fontWeight: 900,
     fontSize: 13,
+    boxShadow: "3px 3px 0 #151515",
   },
+  btnSmallPrimary: {
+    background: "#B9F5D8", // mint
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 14,
+    padding: "8px 10px",
+    cursor: "pointer",
+    fontWeight: 900,
+    fontSize: 13,
+    boxShadow: "3px 3px 0 #151515",
+  },
+
   grid2: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -92,80 +115,103 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "start",
     marginTop: 12,
   },
+
+  // Cards: pastel fill + thick outline + big offset shadow
   card: {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.10)",
-    borderRadius: 16,
-    padding: 16,
-    boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    borderRadius: 22,
+    padding: 18,
+    boxShadow: "8px 8px 0 #151515",
   },
-  cardTitle: { margin: 0, fontSize: 16, letterSpacing: -0.2 },
-  cardDesc: { margin: "8px 0 0", color: "#9ca3af", fontSize: 13, lineHeight: 1.4 },
+  cardTitle: { margin: 0, fontSize: 16, letterSpacing: -0.2, fontWeight: 900 },
+  cardDesc: {
+    margin: "8px 0 0",
+    color: "rgba(0,0,0,0.65)",
+    fontSize: 13,
+    lineHeight: 1.5,
+  },
+
   formCol: { display: "grid", gap: 10, marginTop: 12 },
-  label: { display: "block", color: "#cbd5e1", fontSize: 12, marginBottom: 6 },
+  label: { display: "block", color: "rgba(0,0,0,0.80)", fontSize: 12, marginBottom: 6, fontWeight: 700 },
+
+  // Inputs: white, thick border, subtle inner shadow
   input: {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "#e5e7eb",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    color: "#151515",
+    borderRadius: 16,
     padding: "10px 12px",
     outline: "none",
     fontSize: 14,
+    boxShadow: "inset 0 1px 0 rgba(0,0,0,0.08)",
   },
   inputMono: {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "#e5e7eb",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    color: "#151515",
+    borderRadius: 16,
     padding: "10px 12px",
     outline: "none",
     fontSize: 13,
     fontFamily:
       'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    boxShadow: "inset 0 1px 0 rgba(0,0,0,0.08)",
   },
+
+  // Messages: look like sticky notes
   msg: {
     marginTop: 10,
     padding: "10px 12px",
-    borderRadius: 12,
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
-    color: "#e5e7eb",
+    borderRadius: 16,
+    background: "#E9F0FF",
+    border: "2px solid #151515",
+    color: "#151515",
     fontSize: 13,
+    boxShadow: "4px 4px 0 #151515",
   },
   msgError: {
     marginTop: 10,
     padding: "10px 12px",
-    borderRadius: 12,
-    background: "rgba(239,68,68,0.12)",
-    border: "1px solid rgba(239,68,68,0.30)",
-    color: "#fecaca",
+    borderRadius: 16,
+    background: "#FFD7D7",
+    border: "2px solid #151515",
+    color: "#151515",
     fontSize: 13,
+    boxShadow: "4px 4px 0 #151515",
   },
+
   list: { display: "grid", gap: 10, marginTop: 12 },
+
   item: {
-    border: "1px solid rgba(255,255,255,0.10)",
-    borderRadius: 14,
-    padding: 12,
-    background: "rgba(0,0,0,0.20)",
+    border: "2px solid #151515",
+    borderRadius: 18,
+    padding: 14,
+    background: "#FFF7E0", // warm card
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
+    boxShadow: "6px 6px 0 #151515",
   },
-  itemTitle: { fontWeight: 900, fontSize: 14, margin: 0 },
-  itemMeta: { color: "#9ca3af", fontSize: 12, marginTop: 6 },
+  itemTitle: { fontWeight: 950, fontSize: 14, margin: 0 },
+  itemMeta: { color: "rgba(0,0,0,0.65)", fontSize: 12, marginTop: 6 },
+
+  // Badges: pastel chips w/ outline
   badge: {
     display: "inline-flex",
     alignItems: "center",
     gap: 6,
     fontSize: 12,
-    color: "#cbd5e1",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    color: "#151515",
+    background: "#FFFFFF",
+    border: "2px solid #151515",
     padding: "6px 10px",
     borderRadius: 999,
+    boxShadow: "3px 3px 0 #151515",
+    fontWeight: 800,
   },
 };
 
@@ -321,6 +367,14 @@ export default function DashboardPage() {
 
   return (
     <div style={styles.page}>
+      {/* Optional: retro font + paper dots */}
+      <style jsx global>{`
+        @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap");
+        body {
+          background: ${styles.page.background};
+        }
+      `}</style>
+
       <div style={styles.container}>
         <div style={styles.topbar}>
           <div>
@@ -346,7 +400,7 @@ export default function DashboardPage() {
         {/* Create / Join */}
         <div style={styles.grid2}>
           {/* Create room */}
-          <section style={styles.card}>
+          <section style={{ ...styles.card, background: "#E9F0FF" }}>
             <h2 style={styles.cardTitle}>Create a room</h2>
             <p style={styles.cardDesc}>Make a room and share an access key or invite link.</p>
 
@@ -391,11 +445,7 @@ export default function DashboardPage() {
 
                 <div style={{ display: "flex", gap: 10, marginTop: 10, flexWrap: "wrap" }}>
                   {createdRoomId && (
-                    <button
-                      style={styles.btnSmall}
-                      type="button"
-                      onClick={() => router.push(`/rooms/${createdRoomId}`)}
-                    >
+                    <button style={styles.btnSmall} type="button" onClick={() => router.push(`/rooms/${createdRoomId}`)}>
                       Go to room →
                     </button>
                   )}
@@ -405,7 +455,7 @@ export default function DashboardPage() {
           </section>
 
           {/* Join room */}
-          <section style={styles.card}>
+          <section style={{ ...styles.card, background: "#FFF7E0" }}>
             <h2 style={styles.cardTitle}>Join a room</h2>
             <p style={styles.cardDesc}>Enter the access key you received.</p>
 
@@ -431,7 +481,7 @@ export default function DashboardPage() {
         </div>
 
         {/* My rooms */}
-        <section style={{ ...styles.card, marginTop: 14 }}>
+        <section style={{ ...styles.card, marginTop: 14, background: "#FFFFFF" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
             <div>
               <h2 style={styles.cardTitle}>My rooms</h2>
@@ -445,9 +495,9 @@ export default function DashboardPage() {
           {roomsErr && <div style={styles.msgError}>{roomsErr}</div>}
 
           {roomsLoading ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>Loading…</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>Loading…</p>
           ) : rooms.length === 0 ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>You’re not in any rooms yet.</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>You’re not in any rooms yet.</p>
           ) : (
             <div style={styles.list}>
               {rooms.map((r) => {
@@ -459,9 +509,9 @@ export default function DashboardPage() {
                       <div style={styles.itemMeta}>
                         {new Date(r.created_at).toLocaleString()} {isMine ? "• owner" : ""}
                       </div>
-                      <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                         <span style={styles.badge}>ID: {r.id.slice(0, 8)}…</span>
-                        {isMine ? <span style={styles.badge}>Admin</span> : <span style={styles.badge}>Member</span>}
+                        {isMine ? <span style={{ ...styles.badge, background: "#B9F5D8" }}>Admin</span> : <span style={{ ...styles.badge, background: "#FFD7D7" }}>Member</span>}
                       </div>
                     </div>
 

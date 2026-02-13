@@ -22,77 +22,101 @@ type MemberRow = {
 const styles: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
-    background: "#0b0f19",
-    color: "#e5e7eb",
+    background: "#F6EFE5",
+    color: "#151515",
     fontFamily:
-      'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
+      '"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial',
   },
   container: {
     maxWidth: 980,
     margin: "0 auto",
-    padding: "28px 18px 60px",
+    padding: "28px 18px 70px",
+    overflowX: "hidden", // hard stop for any accidental overflow
   },
+
   topbar: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    gap: 12,
+    gap: 14,
     marginBottom: 18,
+    flexWrap: "wrap", // helps on small screens
   },
-  title: { margin: 0, fontSize: 28, letterSpacing: -0.2 },
-  subtitle: { margin: "8px 0 0", color: "#9ca3af", fontSize: 13, lineHeight: 1.4 },
+  title: { margin: 0, fontSize: 34, letterSpacing: -0.6, lineHeight: 1.05, fontWeight: 950 },
+  subtitle: { margin: "10px 0 0", color: "rgba(0,0,0,0.65)", fontSize: 13, lineHeight: 1.5 },
+
   pillRow: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 },
   pill: {
     fontSize: 12,
-    color: "#cbd5e1",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    color: "#151515",
+    background: "#FFF6B3",
+    border: "2px solid #151515",
     padding: "6px 10px",
     borderRadius: 999,
+    boxShadow: "3px 3px 0 #151515",
+    fontWeight: 800,
   },
+  pillAlt: {
+    fontSize: 12,
+    color: "#151515",
+    background: "#E9F0FF",
+    border: "2px solid #151515",
+    padding: "6px 10px",
+    borderRadius: 999,
+    boxShadow: "3px 3px 0 #151515",
+    fontWeight: 800,
+  },
+
   btn: {
-    background: "#ffffff",
-    color: "#0b0f19",
-    border: "none",
-    borderRadius: 12,
+    background: "#151515",
+    color: "#FFFFFF",
+    border: "2px solid #151515",
+    borderRadius: 16,
     padding: "10px 14px",
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 950,
     fontSize: 14,
-    boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+    boxShadow: "4px 4px 0 #151515",
     whiteSpace: "nowrap",
   },
   btnGhost: {
-    background: "transparent",
-    color: "#e5e7eb",
-    border: "1px solid rgba(255,255,255,0.18)",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 16,
     padding: "10px 14px",
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 950,
     fontSize: 14,
+    boxShadow: "4px 4px 0 #151515",
     whiteSpace: "nowrap",
   },
   btnSmall: {
-    background: "rgba(255,255,255,0.08)",
-    color: "#e5e7eb",
-    border: "1px solid rgba(255,255,255,0.12)",
-    borderRadius: 10,
+    background: "#FFFFFF",
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 14,
     padding: "8px 10px",
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 950,
     fontSize: 13,
+    boxShadow: "3px 3px 0 #151515",
+    whiteSpace: "nowrap",
   },
   btnSmallPrimary: {
-    background: "#ffffff",
-    color: "#0b0f19",
-    border: "none",
-    borderRadius: 10,
+    background: "#B9F5D8",
+    color: "#151515",
+    border: "2px solid #151515",
+    borderRadius: 14,
     padding: "8px 10px",
     cursor: "pointer",
-    fontWeight: 800,
+    fontWeight: 950,
     fontSize: 13,
+    boxShadow: "3px 3px 0 #151515",
+    whiteSpace: "nowrap",
   },
+
+  // Desktop default: 2 columns. Mobile override is done via CSS (below).
   grid2: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -100,100 +124,193 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "start",
     marginTop: 12,
   },
+
   card: {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.10)",
-    borderRadius: 16,
-    padding: 16,
-    boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    borderRadius: 22,
+    padding: 18,
+    boxShadow: "8px 8px 0 #151515",
+    minWidth: 0, // prevents grid children from forcing overflow
   },
-  cardTitle: { margin: 0, fontSize: 16, letterSpacing: -0.2 },
-  cardDesc: { margin: "8px 0 0", color: "#9ca3af", fontSize: 13, lineHeight: 1.4 },
+  cardBlue: {
+    background: "#E9F0FF",
+    border: "2px solid #151515",
+    borderRadius: 22,
+    padding: 18,
+    boxShadow: "8px 8px 0 #151515",
+    minWidth: 0,
+  },
+  cardYellow: {
+    background: "#FFF7E0",
+    border: "2px solid #151515",
+    borderRadius: 22,
+    padding: 18,
+    boxShadow: "8px 8px 0 #151515",
+    minWidth: 0,
+  },
+
+  cardTitle: { margin: 0, fontSize: 16, letterSpacing: -0.2, fontWeight: 950 },
+  cardDesc: { margin: "8px 0 0", color: "rgba(0,0,0,0.65)", fontSize: 13, lineHeight: 1.5 },
+
+  // Desktop default: 3 columns. Mobile override via CSS below.
   formRow: {
     display: "grid",
-    gridTemplateColumns: "1fr 130px 140px",
+    gridTemplateColumns: "1fr 150px 120px",
     gap: 10,
     marginTop: 12,
+    alignItems: "end",
+    minWidth: 0,
   },
-  label: { display: "block", color: "#cbd5e1", fontSize: 12, marginBottom: 6 },
+
+  label: { display: "block", color: "rgba(0,0,0,0.80)", fontSize: 12, marginBottom: 6, fontWeight: 800 },
+
   input: {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "#e5e7eb",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    color: "#151515",
+    borderRadius: 16,
     padding: "10px 12px",
     outline: "none",
     fontSize: 14,
+    boxShadow: "inset 0 1px 0 rgba(0,0,0,0.08)",
+    minWidth: 0,
   },
   inputMono: {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "#e5e7eb",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    color: "#151515",
+    borderRadius: 16,
     padding: "10px 12px",
     outline: "none",
     fontSize: 13,
     fontFamily:
       'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    boxShadow: "inset 0 1px 0 rgba(0,0,0,0.08)",
+    minWidth: 0,
   },
   select: {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "#e5e7eb",
-    borderRadius: 12,
+    background: "#FFFFFF",
+    border: "2px solid #151515",
+    color: "#151515",
+    borderRadius: 16,
     padding: "10px 12px",
     outline: "none",
     fontSize: 14,
     appearance: "none",
+    boxShadow: "inset 0 1px 0 rgba(0,0,0,0.08)",
+    minWidth: 0,
   },
+
   msg: {
     marginTop: 10,
     padding: "10px 12px",
-    borderRadius: 12,
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
-    color: "#e5e7eb",
+    borderRadius: 16,
+    background: "#E9F0FF",
+    border: "2px solid #151515",
+    color: "#151515",
     fontSize: 13,
+    boxShadow: "4px 4px 0 #151515",
+    lineHeight: 1.5,
+    minWidth: 0,
   },
   msgError: {
     marginTop: 10,
     padding: "10px 12px",
-    borderRadius: 12,
-    background: "rgba(239,68,68,0.12)",
-    border: "1px solid rgba(239,68,68,0.30)",
-    color: "#fecaca",
+    borderRadius: 16,
+    background: "#FFD7D7",
+    border: "2px solid #151515",
+    color: "#151515",
     fontSize: 13,
+    boxShadow: "4px 4px 0 #151515",
+    lineHeight: 1.5,
+    minWidth: 0,
   },
-  list: { display: "grid", gap: 10, marginTop: 12 },
+
+  list: { display: "grid", gap: 10, marginTop: 12, minWidth: 0 },
+
   item: {
-    border: "1px solid rgba(255,255,255,0.10)",
-    borderRadius: 14,
-    padding: 12,
-    background: "rgba(0,0,0,0.20)",
+    border: "2px solid #151515",
+    borderRadius: 18,
+    padding: 14,
+    background: "#FFF7E0",
+    boxShadow: "6px 6px 0 #151515",
+    minWidth: 0,
   },
+  itemDone: {
+    border: "2px solid #151515",
+    borderRadius: 18,
+    padding: 14,
+    background: "#B9F5D8",
+    boxShadow: "6px 6px 0 #151515",
+    minWidth: 0,
+  },
+
   itemTop: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "flex-start",
     gap: 10,
+    flexWrap: "wrap", // prevents overflow when buttons + text get tight
+    minWidth: 0,
   },
-  itemTitle: { fontWeight: 800, fontSize: 14, margin: 0 },
-  itemMeta: { color: "#9ca3af", fontSize: 12, marginTop: 6 },
-  rowBetween: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginTop: 10 },
-  badge: {
+  itemTitle: { fontWeight: 950, fontSize: 14, margin: 0 },
+  itemMeta: { color: "rgba(0,0,0,0.65)", fontSize: 12, marginTop: 6, lineHeight: 1.4 },
+
+  rowBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 10,
+    flexWrap: "wrap", // key: prevents right-scroll on mobile
+    minWidth: 0,
+  },
+
+  badgeSoft: {
     display: "inline-flex",
     alignItems: "center",
     gap: 6,
     fontSize: 12,
-    color: "#cbd5e1",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    color: "#151515",
+    background: "#E9F0FF",
+    border: "2px solid #151515",
     padding: "6px 10px",
     borderRadius: 999,
+    boxShadow: "3px 3px 0 #151515",
+    fontWeight: 800,
+    minWidth: 0,
   },
+
+  // doodle: {
+  //   position: "absolute",
+  //   right: -8,
+  //   top: -10,
+  //   width: 56,
+  //   height: 56,
+  //   borderRadius: 18,
+  //   background: "#FFD7D7",
+  //   border: "2px solid #151515",
+  //   boxShadow: "6px 6px 0 #151515",
+  //   transform: "rotate(8deg)",
+  //   pointerEvents: "none",
+  // },
+  // doodle2: {
+  //   position: "absolute",
+  //   left: -10,
+  //   bottom: -12,
+  //   width: 64,
+  //   height: 44,
+  //   borderRadius: 18,
+  //   background: "#FFF6B3",
+  //   border: "2px solid #151515",
+  //   boxShadow: "6px 6px 0 #151515",
+  //   transform: "rotate(-6deg)",
+  //   pointerEvents: "none",
+  // },
 };
 
 export default function RoomPage({ params }: { params: { id: string } }) {
@@ -202,7 +319,6 @@ export default function RoomPage({ params }: { params: { id: string } }) {
 
   const [roomName, setRoomName] = useState<string>("");
   const [me, setMe] = useState<{ id: string; email: string | null } | null>(null);
-
   const [isOwner, setIsOwner] = useState(false);
 
   // Add task
@@ -283,12 +399,7 @@ export default function RoomPage({ params }: { params: { id: string } }) {
   async function loadMembersAndOwner(myId: string) {
     setMembersErr(null);
     try {
-      const { data: room, error: roomErr } = await supabase
-        .from("rooms")
-        .select("owner_id")
-        .eq("id", roomId)
-        .single();
-
+      const { data: room, error: roomErr } = await supabase.from("rooms").select("owner_id").eq("id", roomId).single();
       if (!roomErr && room?.owner_id) setIsOwner(room.owner_id === myId);
 
       const { data: mems, error: memErr } = await supabase
@@ -309,22 +420,12 @@ export default function RoomPage({ params }: { params: { id: string } }) {
     setAdminMsg(null);
 
     const cleanTitle = title.trim();
-    if (!cleanTitle) {
-      setAddMsg("Task title is required.");
-      return;
-    }
-    if (difficulty < 1 || difficulty > 5) {
-      setAddMsg("Difficulty must be between 1 and 5.");
-      return;
-    }
+    if (!cleanTitle) return setAddMsg("Task title is required.");
+    if (difficulty < 1 || difficulty > 5) return setAddMsg("Difficulty must be between 1 and 5.");
 
     setAdding(true);
     try {
-      const { error } = await supabase.rpc("add_room_task", {
-        rid: roomId,
-        task_title: cleanTitle,
-        diff: difficulty,
-      });
+      const { error } = await supabase.rpc("add_room_task", { rid: roomId, task_title: cleanTitle, diff: difficulty });
       if (error) throw error;
 
       setTitle("");
@@ -384,17 +485,59 @@ export default function RoomPage({ params }: { params: { id: string } }) {
     return "Brutal";
   }
 
+  function shortId(id: string) {
+    return `${id.slice(0, 8)}…`;
+  }
+
   return (
     <div style={styles.page}>
+      {/* Retro font + RESPONSIVE FIXES (no more horizontal scrolling on mobile) */}
+      <style jsx global>{`
+        @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap");
+        body {
+          background: ${styles.page.background};
+          overflow-x: hidden;
+        }
+
+        /* These classes target the sections that were overflowing */
+        @media (max-width: 700px) {
+          .room-grid2 {
+            grid-template-columns: 1fr !important;
+          }
+
+          .room-formRow {
+            grid-template-columns: 1fr !important;
+          }
+
+          .room-formRow > div {
+            width: 100%;
+            min-width: 0;
+          }
+
+          .room-formRow button {
+            width: 100%;
+          }
+
+          .room-adminButtonRow button {
+            width: 100%;
+          }
+
+          .room-assignSelect {
+            width: 100% !important;
+          }
+        }
+      `}</style>
+
       <div style={styles.container}>
         <div style={styles.topbar}>
-          <div>
+          <div style={{ position: "relative", minWidth: 0 }}>
+            <div style={styles.doodle} />
             <h1 style={styles.title}>{roomName || "Room"}</h1>
             <div style={styles.subtitle}>
               Signed in as <b>{me?.email ?? "..."}</b>
               <div style={styles.pillRow}>
-                <span style={styles.pill}>
-                  Room: <span style={{ fontFamily: styles.inputMono.fontFamily }}>{roomId}</span>
+                <span style={styles.pillAlt}>
+                  Room: <span style={{ fontFamily: styles.inputMono.fontFamily }}>{shortId(roomId)}</span>
                 </span>
                 {isOwner ? <span style={styles.pill}>Admin</span> : <span style={styles.pill}>Member</span>}
               </div>
@@ -409,13 +552,13 @@ export default function RoomPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* Create / Admin row */}
-        <div style={styles.grid2}>
+        <div className="room-grid2" style={styles.grid2}>
           {/* Add task */}
-          <section style={styles.card}>
+          <section style={styles.cardBlue}>
             <h2 style={styles.cardTitle}>Add a task</h2>
             <p style={styles.cardDesc}>Anyone in the room can add chores. Difficulty is 1–5.</p>
 
-            <form onSubmit={addTask} style={styles.formRow}>
+            <form className="room-formRow" onSubmit={addTask} style={styles.formRow}>
               <div>
                 <label style={styles.label}>Task</label>
                 <input
@@ -428,11 +571,7 @@ export default function RoomPage({ params }: { params: { id: string } }) {
 
               <div>
                 <label style={styles.label}>Difficulty</label>
-                <select
-                  style={styles.select}
-                  value={difficulty}
-                  onChange={(e) => setDifficulty(Number(e.target.value))}
-                >
+                <select style={styles.select} value={difficulty} onChange={(e) => setDifficulty(Number(e.target.value))}>
                   {[1, 2, 3, 4, 5].map((d) => (
                     <option key={d} value={d}>
                       {d} – {difficultyLabel(d)}
@@ -441,7 +580,7 @@ export default function RoomPage({ params }: { params: { id: string } }) {
                 </select>
               </div>
 
-              <div style={{ alignSelf: "end" }}>
+              <div>
                 <button style={styles.btnSmallPrimary} type="submit" disabled={adding}>
                   {adding ? "Adding…" : "Add"}
                 </button>
@@ -452,15 +591,15 @@ export default function RoomPage({ params }: { params: { id: string } }) {
           </section>
 
           {/* Admin tools */}
-          <section style={styles.card}>
+          <section style={styles.cardYellow}>
             <h2 style={styles.cardTitle}>Admin tools</h2>
             <p style={styles.cardDesc}>
               {isOwner ? "Assign chores or randomize tasks for everyone." : "Only the room owner can assign/randomize."}
             </p>
 
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
+            <div className="room-adminButtonRow" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
               <button
-                style={isOwner ? styles.btn : { ...styles.btn, opacity: 0.5, cursor: "not-allowed" }}
+                style={!isOwner || randomizing ? { ...styles.btn, opacity: 0.6, cursor: "not-allowed" } : styles.btn}
                 type="button"
                 disabled={!isOwner || randomizing}
                 onClick={randomize}
@@ -475,8 +614,9 @@ export default function RoomPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* My chores */}
-        <section style={{ ...styles.card, marginTop: 14 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+        <section style={{ ...styles.card, marginTop: 14, position: "relative" }}>
+          <div style={styles.doodle2} />
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div>
               <h2 style={styles.cardTitle}>My chores</h2>
               <p style={styles.cardDesc}>Tasks currently assigned to you.</p>
@@ -489,41 +629,45 @@ export default function RoomPage({ params }: { params: { id: string } }) {
           {tasksErr && <div style={styles.msgError}>{tasksErr}</div>}
 
           {tasksLoading ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>Loading…</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>Loading…</p>
           ) : myTasks.length === 0 ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>You have no assigned chores 🎉</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>You have no assigned chores 🎉</p>
           ) : (
             <div style={styles.list}>
-              {myTasks.map((t) => (
-                <div key={t.id} style={styles.item}>
-                  <div style={styles.itemTop}>
-                    <div>
-                      <div
-                        style={{
-                          ...styles.itemTitle,
-                          textDecoration: t.is_done ? "line-through" : "none",
-                          opacity: t.is_done ? 0.7 : 1,
-                        }}
-                      >
-                        {t.title}
+              {myTasks.map((t) => {
+                const doneStyle = t.is_done ? styles.itemDone : styles.item;
+                return (
+                  <div key={t.id} style={doneStyle}>
+                    <div style={styles.itemTop}>
+                      <div style={{ minWidth: 0 }}>
+                        <div
+                          style={{
+                            ...styles.itemTitle,
+                            textDecoration: t.is_done ? "line-through" : "none",
+                            opacity: t.is_done ? 0.75 : 1,
+                            wordBreak: "break-word",
+                          }}
+                        >
+                          {t.title}
+                        </div>
+                        <div style={styles.itemMeta}>
+                          Difficulty: {t.difficulty}/5 • {difficultyLabel(t.difficulty)}
+                        </div>
                       </div>
-                      <div style={styles.itemMeta}>
-                        Difficulty: {t.difficulty}/5 • {difficultyLabel(t.difficulty)}
-                      </div>
+                      <button style={styles.btnSmallPrimary} type="button" onClick={() => markDone(t.id, !t.is_done)}>
+                        {t.is_done ? "Undo" : "Done"}
+                      </button>
                     </div>
-                    <button style={styles.btnSmall} type="button" onClick={() => markDone(t.id, !t.is_done)}>
-                      {t.is_done ? "Undo" : "Done"}
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </section>
 
         {/* All tasks */}
         <section style={{ ...styles.card, marginTop: 14 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div>
               <h2 style={styles.cardTitle}>All tasks</h2>
               <p style={styles.cardDesc}>Everyone in the room sees the same list.</p>
@@ -534,23 +678,25 @@ export default function RoomPage({ params }: { params: { id: string } }) {
           </div>
 
           {tasksLoading ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>Loading…</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>Loading…</p>
           ) : tasks.length === 0 ? (
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>No tasks yet.</p>
+            <p style={{ marginTop: 12, color: "rgba(0,0,0,0.65)" }}>No tasks yet.</p>
           ) : (
             <div style={styles.list}>
               {tasks.map((t) => {
                 const assignee = t.task_assignments?.assignee_id ?? null;
+                const doneStyle = t.is_done ? styles.itemDone : styles.item;
 
                 return (
-                  <div key={t.id} style={styles.item}>
+                  <div key={t.id} style={doneStyle}>
                     <div style={styles.itemTop}>
-                      <div>
+                      <div style={{ minWidth: 0 }}>
                         <div
                           style={{
                             ...styles.itemTitle,
                             textDecoration: t.is_done ? "line-through" : "none",
-                            opacity: t.is_done ? 0.7 : 1,
+                            opacity: t.is_done ? 0.75 : 1,
+                            wordBreak: "break-word",
                           }}
                         >
                           {t.title}
@@ -561,25 +707,23 @@ export default function RoomPage({ params }: { params: { id: string } }) {
                         </div>
                       </div>
 
-                      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                        <button style={styles.btnSmall} type="button" onClick={() => markDone(t.id, !t.is_done)}>
-                          {t.is_done ? "Undo" : "Done"}
-                        </button>
-                      </div>
+                      <button style={styles.btnSmall} type="button" onClick={() => markDone(t.id, !t.is_done)}>
+                        {t.is_done ? "Undo" : "Done"}
+                      </button>
                     </div>
 
                     <div style={styles.rowBetween}>
-                      <span style={styles.badge}>
+                      <span style={styles.badgeSoft}>
                         Assigned:{" "}
                         {assignee ? (
-                          <span style={{ fontFamily: styles.inputMono.fontFamily }}>{assignee.slice(0, 8)}…</span>
+                          <span style={{ fontFamily: styles.inputMono.fontFamily }}>{shortId(assignee)}</span>
                         ) : (
-                          <span style={{ color: "#9ca3af" }}>Unassigned</span>
+                          <span style={{ color: "rgba(0,0,0,0.65)" }}>Unassigned</span>
                         )}
                       </span>
 
                       {isOwner && (
-                        <div style={{ width: 320, maxWidth: "100%" }}>
+                        <div className="room-assignSelect" style={{ width: 320, maxWidth: "100%", minWidth: 0 }}>
                           <select
                             style={styles.select}
                             value={assignee ?? ""}
@@ -592,11 +736,15 @@ export default function RoomPage({ params }: { params: { id: string } }) {
                             <option value="">Assign to…</option>
                             {members.map((m) => (
                               <option key={m.user_id} value={m.user_id}>
-                                {m.user_id}
+                                {shortId(m.user_id)}
                                 {m.role === "owner" ? " (owner)" : ""}
                               </option>
                             ))}
                           </select>
+
+                          <div style={{ marginTop: 8, fontSize: 12, color: "rgba(0,0,0,0.65)" }}>
+                            Tip: assignments happen instantly when you pick a user.
+                          </div>
                         </div>
                       )}
                     </div>
@@ -608,11 +756,10 @@ export default function RoomPage({ params }: { params: { id: string } }) {
         </section>
 
         {/* Invite reminder */}
-        <section style={{ ...styles.card, marginTop: 14 }}>
+        <section style={{ ...styles.cardBlue, marginTop: 14 }}>
           <h2 style={styles.cardTitle}>Invite</h2>
-          <p style={styles.cardDesc}>
-            Invite links look like: <input style={{ ...styles.inputMono, marginTop: 8 }} readOnly value={`${origin}/invite/<token>`} />
-          </p>
+          <p style={styles.cardDesc}>Invite links look like:</p>
+          <input style={{ ...styles.inputMono, marginTop: 10 }} readOnly value={`${origin}/invite/<token>`} />
         </section>
       </div>
     </div>
